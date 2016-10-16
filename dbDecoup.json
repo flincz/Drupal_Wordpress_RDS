@@ -1,0 +1,91 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "AWS CloudFormation Sample Template Drupal_Multi_AZ. Drupal is an open source content management platform powering millions of websites and applications. This template installs a highly-available, scalable Drupal deployment using a multi-az Amazon RDS database instance for storage. It uses the AWS CloudFormation bootstrap scripts to install packages and files at instance launch time. **WARNING** This template creates one or more Amazon EC2 instances, an Elastic Load Balancer and an Amazon RDS database. You will be billed for the AWS resources used if you create a stack from this template.",
+
+  "Parameters" : {
+
+    "DrupalDBName": {
+      "Description" : "The Drupal database name",
+      "Type": "String"
+    },
+    "DrupalDBUsername": {
+      "Description" : "The Drupal database admin account username",
+      "Type": "String"
+    },
+    "DrupalDBPassword": {
+      "Description" : "The Drupal database admin account password",
+      "Type": "String"
+    },
+
+    "DrupalDBClass" : {
+      "Description" : "Database instance class",
+      "Type" : "String"
+    },
+    "DrupalDBAllocatedStorage" : {
+      "Description" : "The size of the database (Gb)",
+      "Type": "Number"
+    },
+    "DrupalMultiAZDatabase": {
+      "Description" : "Create a multi-AZ MySQL Amazon RDS database instance",
+      "Type": "String"
+    }
+
+},
+
+  "Mappings" : {
+
+  },
+
+  "Resources" : {
+
+    "WebServerSecurityGroupStatPass" : {
+      "Type" : "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription" : "Bling Blargh",
+        "SecurityGroupIngress" : [{
+            "IpProtocol" : "tcp",
+            "FromPort" : "80",
+            "ToPort" : "80",
+            "CidrIp" : "0.0.0.0/0"
+         },
+         {
+             "IpProtocol" : "tcp",
+             "FromPort" : "22",
+             "ToPort" : "22",
+             "CidrIp" : "0.0.0.0/0"
+          }]
+      }
+    },
+
+    "DBSG": {
+      "Type": "AWS::RDS::DBSecurityGroup",
+      "Properties": {
+        "GroupDescription" : "Bling Blarghhh",
+        "DBSecurityGroupIngress": { "EC2SecurityGroupName": { "Ref" : "WebServerSecurityGroupStatPass" }      }
+    }
+    },
+
+
+
+    "DBInstance" : {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "DBName"            : { "Ref" : "DrupalDBName" },
+        "Engine"            : "MySQL",
+        "MultiAZ"           : { "Ref": "DrupalMultiAZDatabase" },
+        "MasterUsername"    : { "Ref" : "DrupalDBUsername" },
+        "DBInstanceClass"   : { "Ref" : "DrupalDBClass" },
+        "DBSecurityGroups"  : [{ "Ref" : "DBSG" }],
+        "AllocatedStorage"  : { "Ref" : "DrupalDBAllocatedStorage" },
+        "MasterUserPassword": { "Ref" : "DrupalDBPassword" }
+      }
+    }
+
+
+  },
+
+  "Outputs" : {
+
+  }
+}
