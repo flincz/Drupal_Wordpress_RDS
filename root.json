@@ -40,6 +40,7 @@
      "ConstraintDescription" : "must be a valid EC2 instance type."},
 
     "DrupalSiteName": {
+      
       "Default": "My Site",
       "Description" : "The name of the Drupal Site",
       "Type": "String"
@@ -47,7 +48,7 @@
     "DrupalSiteEMail": {
       "Description" : "EMail for site administrator",
       "Type": "String",
-      "Default" : "gd01rory@gmail.com"
+      "Default" : "gd@gmail.com"
     },
     "DrupalSiteAdmin": {
       "Description" : "The Drupal site admin account username",
