@@ -205,7 +205,7 @@
   "LoadBalancer": {
           "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
           "Properties": {
-            "LoadBalancerName": "LoadBalancer",
+            "LoadBalancerName": "DrupalLoadBalancer",
             "Listeners": [
               {
                 "InstancePort": 80,
@@ -228,7 +228,7 @@
           }
         },
 
-        "AppASG": {
+    "ASG": {
       "Type": "AWS::AutoScaling::AutoScalingGroup",
       "Properties": {
         "AvailabilityZones": [
@@ -238,7 +238,7 @@
         ],
         "DesiredCapacity": 1,
         "LaunchConfigurationName": {
-          "Ref": "AppLaunchConfiguration"
+          "Ref": "WebServer"
         },
         "LoadBalancerNames": [
           {
@@ -257,7 +257,8 @@
         "AutoScalingRollingUpdate": {
           "MinInstancesInService": 1
         }
-      },
+      }
+    },
 
   "WebServer": {
       "Type": "AWS::Autoscaling::LaunchConfiguration",
