@@ -275,7 +275,9 @@
 
   "LoadBalancer": {
           "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
+          "DependsOn" : "WebServerSecurityGroup",
           "Properties": {
+            "AvailabilityZones": { "Fn::GetAZs" : "" },
             "LoadBalancerName": "DrupalLoadBalancer",
             "Listeners": [
               {
@@ -437,6 +439,7 @@
       "Type" : "AWS::EC2::SecurityGroup",
       "Properties" : {
         "GroupDescription" : "Enable HTTP access via port 80 and SSH access",
+        "VpcId" : { "Ref" : "YasVPC" },
         "SecurityGroupIngress" : [
           {"IpProtocol" : "tcp", "FromPort" : "80", "ToPort" : "80", "CidrIp" : "0.0.0.0/0"},
           {"IpProtocol" : "tcp", "FromPort" : "22", "ToPort" : "22", "CidrIp" : { "Ref" : "SSHLocation"}}
