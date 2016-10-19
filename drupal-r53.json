@@ -266,7 +266,7 @@
           "DependsOn" : "AttachGateway",
           "Properties" : {
             "Domain" : "vpc",
-            "InstanceId" : { "Ref" : "Ec2Instance" }
+            "InstanceId" : { "Ref" : "WebServer" }
           }
     },
 
