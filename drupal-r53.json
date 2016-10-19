@@ -275,7 +275,6 @@
 
   "LoadBalancer": {
           "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
-          "DependsOn" : "WebServerSecurityGroup",
           "Properties": {
             "AvailabilityZones": { "Fn::GetAZs" : "" },
             "LoadBalancerName": "DrupalLoadBalancer",
@@ -287,12 +286,7 @@
                 "Protocol": "HTTP"
               }
             ],
-            "Scheme": "internet-facing",
-            "SecurityGroups": [
-              {
-                "Ref": "WebServerSecurityGroup"
-              }
-            ]
+            "Scheme": "internet-facing"
           }
         },
 
@@ -310,12 +304,7 @@
           }
         ],
         "MaxSize": 2,
-        "MinSize": 1,
-        "VPCZoneIdentifier": [
-          {
-            "Ref": "YasVPCSubnet"
-          }
-        ]
+        "MinSize": 1
       },
       "UpdatePolicy": {
         "AutoScalingRollingUpdate": {
