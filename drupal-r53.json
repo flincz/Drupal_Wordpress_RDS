@@ -290,11 +290,6 @@
               {
                 "Ref": "WebServerSecurityGroup"
               }
-            ],
-            "Subnets": [
-              {
-                "Ref": "YasVPCSubnet"
-              }
             ]
           }
         },
@@ -453,6 +448,6 @@
 
 
   "Outputs" : {
-    
+
   }
 }
