@@ -328,7 +328,7 @@
     },
 
   "WebServer": {
-      "Type": "AWS::Autoscaling::LaunchConfiguration",
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
       "Metadata" : {
         "AWS::CloudFormation::Init" : {
           "config" : {
@@ -453,9 +453,6 @@
 
 
   "Outputs" : {
-    "WebsiteURL" : {
-      "Value" : { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "WebServer", "PublicDnsName" ]}]] },
-      "Description" : "Drupal Website"
-    }
+    
   }
 }
