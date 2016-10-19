@@ -260,14 +260,7 @@
             "SubnetId" : { "Ref" : "YasVPCSubnet" },
             "RouteTableId" : { "Ref" : "RouteTable" }
           }
-        },
-        "IPAddress" : {
-          "Type" : "AWS::EC2::EIP",
-          "DependsOn" : "AttachGateway",
-          "Properties" : {
-            "Domain" : "vpc",
-            "InstanceId" : { "Ref" : "WebServer" }
-          }
+        }
     },
 
 
