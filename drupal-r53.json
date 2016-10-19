@@ -261,6 +261,7 @@
             "RouteTableId" : { "Ref" : "RouteTable" }
           }
         }
+
     },
 
 
@@ -428,11 +429,5 @@
         ]
       }
     }
-  },
-
-
-
-  "Outputs" : {
 
   }
-}
