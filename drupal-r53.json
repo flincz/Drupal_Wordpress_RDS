@@ -202,6 +202,77 @@
 
   "Resources" : {
 
+    "YasVPC" : {
+          "Type" : "AWS::EC2::VPC",
+          "Properties" : {
+            "CidrBlock" : "10.0.0.0/16",
+            "EnableDnsSupport" : "true",
+            "EnableDnsHostnames" : "true",
+            "Tags" : [ {"Key" : "Application", "Value" : { "Ref" : "AWS::StackId"} } ]
+          }
+        },
+
+        "YasVPCSubnet" : {
+          "Type" : "AWS::EC2::Subnet",
+          "Properties" : {
+            "VpcId" : { "Ref" : "YasVPC"  },
+            "CidrBlock" : "10.0.0.0/24",
+            "Tags" : [ {"Key" : "Application", "Value" : { "Ref" : "AWS::StackId"} } ]
+          }
+        },
+
+        "InternetGateway" : {
+          "Type" : "AWS::EC2::InternetGateway",
+          "Properties" : {
+            "Tags" : [ {"Key" : "Application", "Value" : { "Ref" : "AWS::StackId"} } ]
+          }
+        },
+
+        "AttachGateway" : {
+           "Type" : "AWS::EC2::VPCGatewayAttachment",
+           "Properties" : {
+             "VpcId" : { "Ref" : "YasVPC" },
+             "InternetGatewayId" : { "Ref" : "InternetGateway" }
+           }
+        },
+
+        "RouteTable" : {
+          "Type" : "AWS::EC2::RouteTable",
+          "Properties" : {
+            "VpcId" : {"Ref" : "YasVPC"},
+            "Tags" : [ {"Key" : "Application", "Value" : { "Ref" : "AWS::StackId"} } ]
+          }
+        },
+
+        "Route" : {
+          "Type" : "AWS::EC2::Route",
+          "DependsOn" : "AttachGateway",
+          "Properties" : {
+            "RouteTableId" : { "Ref" : "RouteTable" },
+            "DestinationCidrBlock" : "0.0.0.0/0",
+            "GatewayId" : { "Ref" : "InternetGateway" }
+          }
+        },
+
+        "SubnetRouteTableAssociation" : {
+          "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+          "Properties" : {
+            "SubnetId" : { "Ref" : "YasVPCSubnet" },
+            "RouteTableId" : { "Ref" : "RouteTable" }
+          }
+        },
+        "IPAddress" : {
+          "Type" : "AWS::EC2::EIP",
+          "DependsOn" : "AttachGateway",
+          "Properties" : {
+            "Domain" : "vpc",
+            "InstanceId" : { "Ref" : "Ec2Instance" }
+          }
+    },
+
+
+
+
   "LoadBalancer": {
           "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
           "Properties": {
@@ -222,7 +293,7 @@
             ],
             "Subnets": [
               {
-                "Ref": "PublicSubnet"
+                "Ref": "YasVPCSubnet"
               }
             ]
           }
@@ -231,11 +302,7 @@
     "ASG": {
       "Type": "AWS::AutoScaling::AutoScalingGroup",
       "Properties": {
-        "AvailabilityZones": [
-          {
-            "Ref": "AvailabilityZone"
-          }
-        ],
+        "AvailabilityZones": { "Fn::GetAZs" : "" },
         "DesiredCapacity": 1,
         "LaunchConfigurationName": {
           "Ref": "WebServer"
@@ -249,7 +316,7 @@
         "MinSize": 1,
         "VPCZoneIdentifier": [
           {
-            "Ref": "PublicSubnet"
+            "Ref": "YasVPCSubnet"
           }
         ]
       },
@@ -382,6 +449,8 @@
       }
     }
   },
+
+
 
   "Outputs" : {
     "WebsiteURL" : {
