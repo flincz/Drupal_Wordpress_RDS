@@ -21,7 +21,7 @@ Locating template resources to the correct locations
    2. Create S3 bucket - **drupalstack**
    3. Add a folder called templates this bucket
    4. Copy json files to /templates directory
-   5. Bucket permissions to enable read all /templates
+   5. Bucket/object permissions to enable read all json in /templates
 
 ### Cloudformation
 
@@ -34,16 +34,17 @@ Consider security precautions such as Drupal credentials and SSHLocation. Defaul
           1. **DrupalSiteEMail** - Change to Drupal admin's email address
           2. **DrupalKeyName** - Change PEM key from "enhance" to PEM created in pre-req
           3. **DrupalSSHLocation** - The IP of Drupal admin's location
-    4. Select **Next** to proceed with the next step of the wizard.
+    4. Add tags if you wish then Select **Next** to proceed with the next step of the wizard.
     5. Select **Next** to skip the **Options** step of the wizard.
-    6. Select **Create** to start the creation of the stack.
-    7. Wait 20 mins until the stack reaches the state **CREATE_COMPLETE**
+    6. **Toggle Checkbox** indicating "... acknowledge that AWS Cloudformation might create IAM resources with custom names."
+    7. Select **Create** to start the creation of the stack.
+    8. Wait 20 mins until the stack reaches the state **CREATE_COMPLETE**
 
 * **Custom Deploy** -
 Each parameter is detailed for deployment
 
     1. **Create stack** in cloudformation console
-    2. Specify an Amazon S3 template URL: https://s3.amazonaws.com/drupalstack/templates/root.json then select      **Next** to proceed through the wizard.
+    2. Specify the Amazon S3 template URL: https://s3.amazonaws.com/REPLACEwithBUCKETNAME/templates/root.json then select **Next** to proceed through the wizard.
     3. Specify each parameter
 
           **Stack Name**
@@ -74,19 +75,17 @@ Each parameter is detailed for deployment
           2. DrupalSSHLocation - IP address range used to SSH into EC2 instances (/32 recommended)
 
     4. Specify a key/value pair for any tags, then select **Next** to proceed through the wizard.
-    5. Finally, **Toggle Checkbox** indicating you "... acknowledge that AWS Cloudformation might create IAM resources with custom names."
+    5. Finally, **Toggle Checkbox** indicating "... acknowledge that AWS Cloudformation might create IAM resources with custom names."
     6. Select **Create** to deploy the stack
     7. Wait 20 mins until the stack reaches the state **CREATE_COMPLETE**
 
-### Test Deployment
+## Test Deployment
 
 When each stack status reads **CREATE_COMPLETE** this means all of the AWS resources have deployed. Now, we can test the elastic load balancer to make sure it's sending requests to the load balanced EC2s. The root template called "ion" outputs a URL for us to accomplish this test. If you can login to the application front-end, the deployment test is successful.
 
-### Process
-
-1. **Select** Stack Name **ion** then select **Outputs** tab on lower pane.
+1. Select Stack Name **ion** then select **Outputs** tab on lower pane.
 2. **Click** the **URL** for landing
-3. Login to application using credentials
+3. Login to application using credentials. Default credentials set to admin/password.
 
 ## Cleanup
 
@@ -94,12 +93,12 @@ This section provides a process for tearing down your Cloudformation environment
 
 1. **Select** ion, **Click** actions, **Select** Delete Stack
 2. The root stack will begin a termination process and remove each stack subsequently.
-3. Remove json files (optional)
+3. Remove json files from S3 bucket (optional)
 
 ## Design considerations
 
-The template is structured into nested stacks for reasons of scalability. The main stack is responsible for parameter configuration and the DB stack is created for the connection of the Drupal stack. The elastic load balancer endpoint enables fault tolerance through instance health checks configured on http port 80 and this is indicative of our application's health. The RDS instance is deployed in a multi-AZ configuration which also provides redundancy in the event of a database tier failure. The architecture of the Drupal system will tolerate end-to-end failures at the ELB, EC2, and RDS layers.
+The template is structured into nested stacks for reasons of scalability. The main stack is responsible for parameter configuration and the DB stack is created for the connection of the Drupal stack. The elastic load balancer endpoint enables fault tolerance through instance health checks configured on http port 80 and this is indicative of our application's health. The RDS instance is deployed in a multi-AZ configuration which also provides redundancy in the event of a database tier failure. The architecture of the Drupal system will tolerate failure as traffic passes through the ELB, EC2, and RDS layers.
 
-The next phase of the design should include a Route53 mechanism for creation of dynamic Cname via cloudformation parameters enabling more of a private customer SaaS like experience.
+The next phase of the design should include a Route53 mechanism for creation of dynamic Cname via cloudformation parameters, enabling more of a private customer SaaS-like experience.
 
 ![Drupal Architecture](https://s3.amazonaws.com/drupalstack/templates/diagram/drupal.png)
