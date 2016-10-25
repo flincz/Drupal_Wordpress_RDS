@@ -82,13 +82,13 @@ Each parameter is detailed for deployment
 
 When each stack status reads **CREATE_COMPLETE** this means all of the AWS resources have deployed. Now, we can test the elastic load balancer to make sure it's sending requests to the load balanced EC2s. The root template called "ion" outputs a URL for us to accomplish this test. If you can login to the application front-end, the deployment test is successful.
 
-* **Process**
+**Process**
 
     1. **Select** Stack Name **ion** then select **Outputs** tab on lower pane.
     2. **Click** the **URL** for landing page
     3. Login to application using credentials
 
-* **Cleanup**
+**Cleanup**
 
 This section provides a process for tearing down your Cloudformation environment. It can be accomplished through the AWS Cloudformation console.
 
@@ -96,7 +96,7 @@ This section provides a process for tearing down your Cloudformation environment
     2. The root stack will begin a termination process and remove each stack subsequently.
     3. Remove json files (optional)
 
-* **Design considerations**
+**Design considerations**
 
 The next phase of the design should include a Route53 mechanism for creation of a dynamic Cname via cloudformation parameters enabling more of a private customer SaaS like experience.
 
