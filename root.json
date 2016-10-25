@@ -169,7 +169,7 @@
     "DBStack" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Metadata" : {
-        "Comment" : "RDS Temlate"
+        "Comment" : "RDS Stack"
       },
       "Properties" : {
         "TemplateURL" : { "Fn::Join" : ["/", [ "https://s3.amazonaws.com", { "Ref" : "TemplateBucket" }, "templates", "dbDecoup.json" ]]},

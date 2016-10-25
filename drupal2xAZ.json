@@ -9,12 +9,10 @@
       "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
       "Type": "String"
     },
-
     "DrupalWebServerCapacity": {
       "Description" : "The initial number of WebServer instances",
       "Type": "Number"
     },
-
     "DrupalSiteName": {
       "Description" : "The name of the Drupal Site",
       "Type": "String"
@@ -31,7 +29,6 @@
       "Description" : "The Drupal site admin account password",
       "Type": "String"
     },
-
     "DrupalDBName": {
       "Description" : "The Drupal database name",
       "Type": "String"
@@ -60,12 +57,10 @@
       "Description" : "Create a multi-AZ MySQL Amazon RDS database instance",
       "Type": "String"
     },
-
     "DrupalSSHLocation" : {
       "Description" : "The IP address range that can be used to SSH to the EC2 instances",
       "Type": "String"
     },
-
     "DrupalInstanceType" : {
      "Description" : "WebServer EC2 instance type",
      "Type" : "String"
@@ -275,6 +270,7 @@
           "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
                             { "Fn::FindInMap" : [ "AWSInstanceType2Arch", { "Ref" : "DrupalInstanceType" }, "Arch" ] } ] },
           "InstanceType"   : { "Ref" : "DrupalInstanceType" },
+          "Tags" : [{ "Key" : "Name", "Value" : "Drupal", "PropagateAtLaunch" : "true" }],
           "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup"} ],
           "KeyName"        : { "Ref" : "DrupalKeyName" },
           "UserData"       : { "Fn::Base64" : { "Fn::Join" : ["", [
