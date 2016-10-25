@@ -2,7 +2,7 @@
 
 ## Guide Overview
 
-In this lab guide, the necessary process is provided for deploying a cloudformation Drupal application. The architecture of the system features a [nested stack](https://aws.amazon.com/blogs/devops/use-nested-stacks-to-create-reusable-templates-and-support-role-specialization/) framework which builds a fault-tolerant mySQL RDS backend which powers the load balanced EC2 front-end. This guide covers the steps from prerequisites to cleanup.
+In this lab guide, the necessary process is provided for deploying a cloudformation Drupal application. The architecture of the system features a [nested stack](https://aws.amazon.com/blogs/devops/use-nested-stacks-to-create-reusable-templates-and-support-role-specialization/) framework which builds a fault-tolerant MySQL RDS backend and powers the load balanced EC2 front-end. This guide covers the steps from prerequisites to cleanup.
 
 ### Prerequisites
 
@@ -21,7 +21,7 @@ Locating template resources to the correct locations
    2. Create S3 bucket - **drupalstack**
    3. Add a folder called templates this bucket
    4. Copy json files to /templates directory
-   5. IAM Permissions to enable read of json files
+   5. Bucket permissions to enable read all /templates
 
 ### Cloudformation
 
@@ -29,11 +29,11 @@ Locating template resources to the correct locations
 Consider security precautions such as Drupal credentials and SSHLocation. Default credentials set to admin/password.
 
     1. <a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=ion&templateURL=https://s3.amazonaws.com/drupalstack/templates/root.json">Launch Stack</a>
-    2. Select **Next** to proceed with the next step of the wizard.
+    2. Select **Next** to proceed.
     3. Review parameter groups
-          DrupalSiteEMail - Change to Drupal admin's email address
-          DrupalKeyName - Change PEM key from "enhance" to PEM created in pre-req
-          DrupalSSHLocation - The IP of Drupal admin's location
+          1. DrupalSiteEMail - Change to Drupal admin's email address
+          2. DrupalKeyName - Change PEM key from "enhance" to PEM created in pre-req
+          3. DrupalSSHLocation - The IP of Drupal admin's location
     4. Select **Next** to proceed with the next step of the wizard.
     5. Select **Next** to skip the **Options** step of the wizard.
     6. Select **Create** to start the creation of the stack.
@@ -92,14 +92,14 @@ When each stack status reads **CREATE_COMPLETE** this means all of the AWS resou
 
 This section provides a process for tearing down your Cloudformation environment. It can be accomplished through the AWS Cloudformation console.
 
-1. **Select** ion, **Click actions**, **Select** Delete Stack
+1. **Select** ion, **Click** actions, **Select** Delete Stack
 2. The root stack will begin a termination process and remove each stack subsequently.
 3. Remove json files (optional)
 
 ## Design considerations
 
-The next phase of the design should include a Route53 mechanism for creation of a dynamic Cname via cloudformation parameters enabling more of a private customer SaaS like experience.
-
 The template is structured into nested stacks for reasons of scalability. The main stack is responsible for parameter configuration and the DB stack is created for the connection of the Drupal stack. The elastic load balancer endpoint enables fault tolerance through instance health checks configured on http port 80 and this is indicative of our application's health. The RDS instance is deployed in a multi-AZ configuration which also provides redundancy in the event of a database tier failure. The architecture of the Drupal system will tolerate end-to-end failures at the ELB, EC2, and RDS layers.
+
+The next phase of the design should include a Route53 mechanism for creation of dynamic Cname via cloudformation parameters enabling more of a private customer SaaS like experience.
 
 ![Drupal Architecture](https://s3.amazonaws.com/drupalstack/templates/diagram/drupal.png)
