@@ -31,9 +31,9 @@ Consider security precautions such as Drupal credentials and SSHLocation. Defaul
     1. <a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=ion&templateURL=https://s3.amazonaws.com/drupalstack/templates/root.json">Launch Stack</a>
     2. Select **Next** to proceed.
     3. Review parameter groups
-          1. DrupalSiteEMail - Change to Drupal admin's email address
-          2. DrupalKeyName - Change PEM key from "enhance" to PEM created in pre-req
-          3. DrupalSSHLocation - The IP of Drupal admin's location
+          1. **DrupalSiteEMail** - Change to Drupal admin's email address
+          2. **DrupalKeyName** - Change PEM key from "enhance" to PEM created in pre-req
+          3. **DrupalSSHLocation** - The IP of Drupal admin's location
     4. Select **Next** to proceed with the next step of the wizard.
     5. Select **Next** to skip the **Options** step of the wizard.
     6. Select **Create** to start the creation of the stack.
