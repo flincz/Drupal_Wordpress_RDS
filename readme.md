@@ -34,3 +34,30 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
     5. Click **Next** to skip the **Options** step of the wizard.
     6. Click **Create** to start the creation of the stack.
     7. Wait until the stack reaches the state **CREATE_COMPLETE**
+
+* **Custom Install** Each parameter is input and explained
+
+    1. Create stack in cloudformation console
+    2. Specify an Amazon S3 template URL: https://s3.amazonaws.com/drupalstack/templates/root.json  
+    3. Specify each parameter
+
+          Stack Name - Name of the cloudformation stack you will create
+
+          TemplateBucket - S3 bucket where json files exist
+          DrupalInstanceType - Drupal EC2 instance size
+          DrupalSiteAdmin - Drupal front end administrator username
+          DrupalSiteEMail - Email address for Drupal administrator
+          DrupalSiteName - Name of Drupal site
+          DrupalSitePassword - Drupal site admin account password
+          DrupalWebServerCapacity - Initial number of Drupal EC2 instances
+
+          DrupalDBName - Drupal database name
+          DrupalDBUsername - Database admin account username
+          DrupalDBPassword - Database admin account password
+          DrupalDBRootPassword - Database admin account root password
+          DrupalDBClass - RDS instance class
+          DrupalDBAllocatedStorage - Size of the database (Gb)
+          DrupalMultiAZDatabase - Create a fault-tolerant, multi-AZ MySQL RDS database instance
+
+          DrupalKeyName - Name of an existing EC2 KeyPair to enable SSH access to the instances
+          DrupalSSHLocation - IP address range used to SSH into EC2 instances (/32 recommended)
