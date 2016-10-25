@@ -100,4 +100,4 @@ The next phase of the design should include a Route53 mechanism for creation of 
 
 The template is structured into nested stacks for reasons of scalability. The main stack is responsible for parameter configuration and the DB stack is created for the connection of the Drupal stack. The elastic load balancer endpoint enables fault tolerance through instance health checks configured on http port 80 and this is indicative of our application's health. The RDS instance is deployed in a multi-AZ configuration which also provides redundancy in the event of a database tier failure. The architecture of the Drupal system will tolerate end-to-end failures at the ELB, EC2, and RDS layers.
 
-![Drupal Architecture](/drupal.png)
+![Drupal Architecture](https://s3.amazonaws.com/drupalstack/templates/diagram/drupal.png)
