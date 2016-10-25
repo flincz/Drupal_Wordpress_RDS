@@ -40,7 +40,7 @@
      "ConstraintDescription" : "must be a valid EC2 instance type."},
 
     "DrupalSiteName": {
-      
+
       "Default": "My Site",
       "Description" : "The name of the Drupal Site",
       "Type": "String"
@@ -135,7 +135,7 @@
     "TemplateBucket" : {
         "Description" : "S3 bucket where templates are stored.",
         "Type" : "String",
-        "Default" : "ifpri" }
+        "Default" : "drupalstack" }
 
   },
   "Metadata" : {
