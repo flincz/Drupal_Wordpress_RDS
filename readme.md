@@ -39,7 +39,7 @@ Consider security precautions such as Drupal credentials and SSHLocation. Defaul
     6. Select **Create** to start the creation of the stack.
     7. Wait 20 mins until the stack reaches the state **CREATE_COMPLETE**
 
-**Custom Deploy** -
+* **Custom Deploy** -
 Each parameter is detailed for deployment
 
     1. **Create stack** in cloudformation console
