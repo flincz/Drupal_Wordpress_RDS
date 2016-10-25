@@ -20,30 +20,33 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
    4. Copy json files to /templates directory
    5. Assure permissions enable you to read json files
 
-## Cloudformation
+### Cloudformation
 
-* **Quick Install** Consider security precautions such as Drupal credentials and SSHLocation. Default credentials set to admin/password.
+* **Quick Deploy** Consider security precautions such as Drupal credentials and SSHLocation. Default credentials set to admin/password.
 
     1. <a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=ion&templateURL=https://s3.amazonaws.com/drupalstack/templates/root.json">Launch Stack</a>
-    2. Click **Next** to proceed with the next step of the wizard.
+    2. Select **Next** to proceed with the next step of the wizard.
     3. Review parameter groups
           DrupalSiteEMail - Change to Drupal admin's email address
           DrupalKeyName - Change PEM key from "enhance" to PEM created in pre-req
           DrupalSSHLocation - The IP of Drupal admin's location
-    4. Click **Next** to proceed with the next step of the wizard.
-    5. Click **Next** to skip the **Options** step of the wizard.
-    6. Click **Create** to start the creation of the stack.
+    4. Select **Next** to proceed with the next step of the wizard.
+    5. Select **Next** to skip the **Options** step of the wizard.
+    6. Select **Create** to start the creation of the stack.
     7. Wait until the stack reaches the state **CREATE_COMPLETE**
 
-* **Custom Install** Each parameter is input and explained
+* **Custom Deploy** Each parameter is input and explained
 
-    1. Create stack in cloudformation console
-    2. Specify an Amazon S3 template URL: https://s3.amazonaws.com/drupalstack/templates/root.json  
+    1. **Create stack** in cloudformation console
+    2. Specify an Amazon S3 template URL: https://s3.amazonaws.com/drupalstack/templates/root.json then select      **Next** to proceed through the wizard.
     3. Specify each parameter
 
           Stack Name - Name of the cloudformation stack you will create
 
-          TemplateBucket - S3 bucket where json files exist
+          -DevOps
+          TemplateBucket - S3 bucket where json files were cloned to
+
+          -Application
           DrupalInstanceType - Drupal EC2 instance size
           DrupalSiteAdmin - Drupal front end administrator username
           DrupalSiteEMail - Email address for Drupal administrator
@@ -51,6 +54,7 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
           DrupalSitePassword - Drupal site admin account password
           DrupalWebServerCapacity - Initial number of Drupal EC2 instances
 
+          -Database
           DrupalDBName - Drupal database name
           DrupalDBUsername - Database admin account username
           DrupalDBPassword - Database admin account password
@@ -59,5 +63,25 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
           DrupalDBAllocatedStorage - Size of the database (Gb)
           DrupalMultiAZDatabase - Create a fault-tolerant, multi-AZ MySQL RDS database instance
 
+          -Access
           DrupalKeyName - Name of an existing EC2 KeyPair to enable SSH access to the instances
           DrupalSSHLocation - IP address range used to SSH into EC2 instances (/32 recommended)
+
+    4. Specify a key/value pair for any tags, then select **Next** to proceed through the wizard.
+    5. Finally, **Toggle Checkbox** indicating you "... acknowledge that AWS Cloudformation might create IAM resources with custom names."
+    6. Select **Create** to deploy the stack
+    7. Wait until the stack reaches the state **CREATE_COMPLETE**
+
+### Test Deployment
+
+When each stack status reads **CREATE_COMPLETE** this means all of the AWS resources have deployed. Now, we can test the elastic load balancer to make sure it's sending requests to the load balanced EC2s. The root template called "ion" outputs a URL for us to accomplish this test.
+
+    1. Select Stack Name **ion** then select **Outputs** tab on lower pane.
+    2. Click the **URL** for landing page
+    3. Test application with credentials
+
+### Cleanup
+
+This section provides a process for tearing down your Cloudformation environment.
+
+    1. 
