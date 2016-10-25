@@ -88,7 +88,7 @@ When each stack status reads **CREATE_COMPLETE** this means all of the AWS resou
     2. **Click** the **URL** for landing page
     3. Login to application using credentials
 
-**Cleanup**
+### Cleanup
 
 This section provides a process for tearing down your Cloudformation environment. It can be accomplished through the AWS Cloudformation console.
 
@@ -96,7 +96,7 @@ This section provides a process for tearing down your Cloudformation environment
     2. The root stack will begin a termination process and remove each stack subsequently.
     3. Remove json files (optional)
 
-**Design considerations**
+### Design considerations
 
 The next phase of the design should include a Route53 mechanism for creation of a dynamic Cname via cloudformation parameters enabling more of a private customer SaaS like experience.
 
