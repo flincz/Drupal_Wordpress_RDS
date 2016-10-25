@@ -46,13 +46,13 @@ Each parameter is detailed for deployment
     2. Specify an Amazon S3 template URL: https://s3.amazonaws.com/drupalstack/templates/root.json then select      **Next** to proceed through the wizard.
     3. Specify each parameter
 
-          -Stack Name
+          **Stack Name**
           1. Name of the cloudformation stack you will create
 
-          -DevOps
+          **DevOps**
           1. TemplateBucket - S3 bucket where json files were cloned to
 
-          -Application
+          **Application**
           1. DrupalInstanceType - Drupal EC2 instance size
           2. DrupalSiteAdmin - Drupal front end administrator username
           3. DrupalSiteEMail - Email address for Drupal administrator
@@ -60,7 +60,7 @@ Each parameter is detailed for deployment
           5. DrupalSitePassword - Drupal site admin account password
           6. DrupalWebServerCapacity - Initial number of Drupal EC2 instances
 
-          -Database
+          **Database**
           1. DrupalDBName - Drupal database name
           2. DrupalDBUsername - Database admin account username
           3. DrupalDBPassword - Database admin account password
@@ -69,7 +69,7 @@ Each parameter is detailed for deployment
           6. DrupalDBAllocatedStorage - Size of the database (Gb)
           7. DrupalMultiAZDatabase - Create a fault-tolerant, multi-AZ MySQL RDS database instance
 
-          -Access
+          **Access**
           1. DrupalKeyName - Name of an existing EC2 KeyPair to enable SSH access to the instances
           2. DrupalSSHLocation - IP address range used to SSH into EC2 instances (/32 recommended)
 
