@@ -6,23 +6,27 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
 
 ### Prerequisites
 
--PEM Key
--Clone of this repository
--AWS Permissions
+1. PEM Key
+2. Clone of this repository
+3. AWS Permissions
 
 ## Deployment
 
-### Establish DevOps space
+### Establish DevOps workflow
+
+* **Location Configuration**
+Locating template resources to the correct location
 
    1. Clone REPO-NAME
-   2. Create a bucket - drupalstack
+   2. Create a bucket - **drupalstack**
    3. Add a folder called templates this bucket
    4. Copy json files to /templates directory
-   5. Assure permissions enable you to read json files
+   5. IAM Permissions to enable read on json files
 
 ### Cloudformation
 
-* **Quick Deploy** Consider security precautions such as Drupal credentials and SSHLocation. Default credentials set to admin/password.
+* **Quick Deploy**
+Consider security precautions such as Drupal credentials and SSHLocation. Default credentials set to admin/password.
 
     1. <a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=ion&templateURL=https://s3.amazonaws.com/drupalstack/templates/root.json">Launch Stack</a>
     2. Select **Next** to proceed with the next step of the wizard.
@@ -35,7 +39,8 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
     6. Select **Create** to start the creation of the stack.
     7. Wait 20 mins until the stack reaches the state **CREATE_COMPLETE**
 
-* **Custom Deploy** Each parameter is input and explained
+* **Custom Deploy**
+Each parameter is detailed for deployment
 
     1. **Create stack** in cloudformation console
     2. Specify an Amazon S3 template URL: https://s3.amazonaws.com/drupalstack/templates/root.json then select      **Next** to proceed through the wizard.
