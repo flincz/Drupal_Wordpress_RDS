@@ -19,7 +19,7 @@ Copying template resources to the correct locations
 
    1. Clone repo - https://github.com/gd01rory/Drupal_Wordpress_RDS.git
    2. Create S3 bucket - **drupalstack**
-   3. Add a folder called templates this bucket
+   3. Add a folder called "templates" to this bucket
    4. Copy json files to /templates directory
    5. Bucket/object permissions to enable read all json in /templates
 
@@ -34,7 +34,7 @@ Please consider security precautions such as Drupal credentials and SSHLocation.
           1. **DrupalSiteEMail** - Change to Drupal admin's email address
           2. **DrupalKeyName** - Change PEM key from "enhance" to PEM created in pre-req
           3. **DrupalSSHLocation** - The IP of Drupal admin's location
-    4. Add tags if you wish then Select **Next** to proceed with the next step of the wizard.
+    4. Add tags if you wish then select **Next** to proceed with the next step of the wizard.
     5. Select **Next** to skip the **Options** step of the wizard.
     6. **Toggle Checkbox** indicating "... acknowledge that AWS Cloudformation might create IAM resources with custom names."
     7. Select **Create** to start the creation of the stack.
