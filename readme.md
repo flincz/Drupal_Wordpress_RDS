@@ -2,7 +2,7 @@
 
 ## Guide Overview
 
-In this lab guide, the necessary process is provided for deploying a cloudformation Drupal application. The architecture of the system features a [nested stack](https://aws.amazon.com/blogs/devops/use-nested-stacks-to-create-reusable-templates-and-support-role-specialization/) framework, which builds a fault-tolerant mySQL RDS backend, and powers a load balanced EC2 front-end. This guide cover the steps from prerequisites to cleanup.
+In this lab guide, the necessary process is provided for deploying a cloudformation Drupal application. The architecture of the system features a [nested stack](https://aws.amazon.com/blogs/devops/use-nested-stacks-to-create-reusable-templates-and-support-role-specialization/) framework which builds a fault-tolerant mySQL RDS backend and powers a load balanced EC2 front-end. This guide covers the steps from prerequisites to cleanup.
 
 ### Prerequisites
 
@@ -14,18 +14,18 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
 
 ### Establish DevOps workflow
 
-* **Location Configuration**
-Locating template resources to the correct location
+* **Location Configuration** -
+Locating template resources to the correct locations
 
-   1. Clone REPO-NAME
-   2. Create a bucket - **drupalstack**
+   1. Clone repo - https://github.com/gd01rory/Drupal_Wordpress_RDS.git
+   2. Create S3 bucket - **drupalstack**
    3. Add a folder called templates this bucket
    4. Copy json files to /templates directory
-   5. IAM Permissions to enable read on json files
+   5. IAM Permissions to enable read of json files
 
 ### Cloudformation
 
-* **Quick Deploy**
+* **Quick Deploy** -
 Consider security precautions such as Drupal credentials and SSHLocation. Default credentials set to admin/password.
 
     1. <a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=ion&templateURL=https://s3.amazonaws.com/drupalstack/templates/root.json">Launch Stack</a>
@@ -39,38 +39,39 @@ Consider security precautions such as Drupal credentials and SSHLocation. Defaul
     6. Select **Create** to start the creation of the stack.
     7. Wait 20 mins until the stack reaches the state **CREATE_COMPLETE**
 
-* **Custom Deploy**
+* **Custom Deploy** -
 Each parameter is detailed for deployment
 
     1. **Create stack** in cloudformation console
     2. Specify an Amazon S3 template URL: https://s3.amazonaws.com/drupalstack/templates/root.json then select      **Next** to proceed through the wizard.
     3. Specify each parameter
 
-          Stack Name - Name of the cloudformation stack you will create
+          -Stack Name
+          1. Name of the cloudformation stack you will create
 
           -DevOps
-          TemplateBucket - S3 bucket where json files were cloned to
+          1. TemplateBucket - S3 bucket where json files were cloned to
 
           -Application
-          DrupalInstanceType - Drupal EC2 instance size
-          DrupalSiteAdmin - Drupal front end administrator username
-          DrupalSiteEMail - Email address for Drupal administrator
-          DrupalSiteName - Name of Drupal site
-          DrupalSitePassword - Drupal site admin account password
-          DrupalWebServerCapacity - Initial number of Drupal EC2 instances
+          1. DrupalInstanceType - Drupal EC2 instance size
+          2. DrupalSiteAdmin - Drupal front end administrator username
+          3. DrupalSiteEMail - Email address for Drupal administrator
+          4. DrupalSiteName - Name of Drupal site
+          5. DrupalSitePassword - Drupal site admin account password
+          6. DrupalWebServerCapacity - Initial number of Drupal EC2 instances
 
           -Database
-          DrupalDBName - Drupal database name
-          DrupalDBUsername - Database admin account username
-          DrupalDBPassword - Database admin account password
-          DrupalDBRootPassword - Database admin account root password
-          DrupalDBClass - RDS instance class
-          DrupalDBAllocatedStorage - Size of the database (Gb)
-          DrupalMultiAZDatabase - Create a fault-tolerant, multi-AZ MySQL RDS database instance
+          1. DrupalDBName - Drupal database name
+          2. DrupalDBUsername - Database admin account username
+          3. DrupalDBPassword - Database admin account password
+          4. DrupalDBRootPassword - Database admin account root password
+          5. DrupalDBClass - RDS instance class
+          6. DrupalDBAllocatedStorage - Size of the database (Gb)
+          7. DrupalMultiAZDatabase - Create a fault-tolerant, multi-AZ MySQL RDS database instance
 
           -Access
-          DrupalKeyName - Name of an existing EC2 KeyPair to enable SSH access to the instances
-          DrupalSSHLocation - IP address range used to SSH into EC2 instances (/32 recommended)
+          1. DrupalKeyName - Name of an existing EC2 KeyPair to enable SSH access to the instances
+          2. DrupalSSHLocation - IP address range used to SSH into EC2 instances (/32 recommended)
 
     4. Specify a key/value pair for any tags, then select **Next** to proceed through the wizard.
     5. Finally, **Toggle Checkbox** indicating you "... acknowledge that AWS Cloudformation might create IAM resources with custom names."
