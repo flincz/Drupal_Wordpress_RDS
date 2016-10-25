@@ -25,7 +25,7 @@ Locating template resources to the correct locations
 
 ### Cloudformation
 
-* **Quick Deploy** -
+**Quick Deploy** -
 Consider security precautions such as Drupal credentials and SSHLocation. Default credentials set to admin/password.
 
     1. <a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=ion&templateURL=https://s3.amazonaws.com/drupalstack/templates/root.json">Launch Stack</a>
