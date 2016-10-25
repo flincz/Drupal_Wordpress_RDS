@@ -33,7 +33,7 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
     4. Select **Next** to proceed with the next step of the wizard.
     5. Select **Next** to skip the **Options** step of the wizard.
     6. Select **Create** to start the creation of the stack.
-    7. Wait until the stack reaches the state **CREATE_COMPLETE**
+    7. Wait 20 mins until the stack reaches the state **CREATE_COMPLETE**
 
 * **Custom Deploy** Each parameter is input and explained
 
@@ -70,18 +70,20 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
     4. Specify a key/value pair for any tags, then select **Next** to proceed through the wizard.
     5. Finally, **Toggle Checkbox** indicating you "... acknowledge that AWS Cloudformation might create IAM resources with custom names."
     6. Select **Create** to deploy the stack
-    7. Wait until the stack reaches the state **CREATE_COMPLETE**
+    7. Wait 20 mins until the stack reaches the state **CREATE_COMPLETE**
 
 ### Test Deployment
 
 When each stack status reads **CREATE_COMPLETE** this means all of the AWS resources have deployed. Now, we can test the elastic load balancer to make sure it's sending requests to the load balanced EC2s. The root template called "ion" outputs a URL for us to accomplish this test.
 
-    1. Select Stack Name **ion** then select **Outputs** tab on lower pane.
-    2. Click the **URL** for landing page
-    3. Test application with credentials
+    1. **Select** Stack Name **ion** then select **Outputs** tab on lower pane.
+    2. **Click** the **URL** for landing page
+    3. Login to application with credentials
 
 ### Cleanup
 
-This section provides a process for tearing down your Cloudformation environment.
+This section provides a process for tearing down your Cloudformation environment. It can be accomplished through the AWS Cloudformation console.
 
-    1. 
+    1. **Select** ion, **Click actions**, **Select** Delete Stack
+    2. The root stack will begin a termination process and remove each stack subsequently.
+    3. Remove json files (optional)
