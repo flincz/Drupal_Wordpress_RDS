@@ -79,7 +79,6 @@ Each parameter is detailed for deployment
     7. Wait 20 mins until the stack reaches the state **CREATE_COMPLETE**
 
 * **Test Deployment**
-
 When each stack status reads **CREATE_COMPLETE** this means all of the AWS resources have deployed. Now, we can test the elastic load balancer to make sure it's sending requests to the load balanced EC2s. The root template called "ion" outputs a URL for us to accomplish this test. If you can login to the application front-end, the deployment test is successful.
 
     1\. **Select** Stack Name **ion** then select **Outputs** tab on lower pane.
@@ -87,7 +86,6 @@ When each stack status reads **CREATE_COMPLETE** this means all of the AWS resou
     3\. Login to application using credentials
 
 * **Cleanup**
-
 This section provides a process for tearing down your Cloudformation environment. It can be accomplished through the AWS Cloudformation console.
 
     1\. **Select** ion, **Click actions**, **Select** Delete Stack
@@ -95,7 +93,6 @@ This section provides a process for tearing down your Cloudformation environment
     3\. Remove json files (optional)
 
 * **Design considerations**
-
 The next phase of the design should include a Route53 mechanism for creation of a dynamic Cname via cloudformation parameters enabling more of a private customer SaaS like experience.
 
 The template is structured into nested stacks for reasons of scalability. The main stack is responsible for parameter configuration and the DB stack is created for the connection of the Drupal stack. The elastic load balancer endpoint enables fault tolerance through instance health checks configured on http port 80 and this is indicative of our application's health. The RDS instance is deployed in a multi-AZ configuration which also provides redundancy in the event of a database tier failure. The architecture of the Drupal system will tolerate end-to-end failures at the ELB, EC2, and RDS layers.
