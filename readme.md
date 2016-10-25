@@ -83,10 +83,9 @@ Each parameter is detailed for deployment
 When each stack status reads **CREATE_COMPLETE** this means all of the AWS resources have deployed. Now, we can test the elastic load balancer to make sure it's sending requests to the load balanced EC2s. The root template called "ion" outputs a URL for us to accomplish this test. If you can login to the application front-end, the deployment test is successful.
 
 ### Process
-
-    - **Select** Stack Name **ion** then select **Outputs** tab on lower pane.
-    - **Click** the **URL** for landing page
-    - Login to application using credentials
+1. **Select** Stack Name **ion** then select **Outputs** tab on lower pane.
+2. **Click** the **URL** for landing
+3. Login to application using credentials
 
 ## Cleanup
 
