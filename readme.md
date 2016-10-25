@@ -2,7 +2,7 @@
 
 ## Guide Overview
 
-In this lab guide, the necessary process is provided for deploying a cloudformation Drupal application. The architecture of the system features a [nested stack](https://aws.amazon.com/blogs/devops/use-nested-stacks-to-create-reusable-templates-and-support-role-specialization/) framework which builds a fault-tolerant mySQL RDS backend and powers a load balanced EC2 front-end. This guide covers the steps from prerequisites to cleanup.
+In this lab guide, the necessary process is provided for deploying a cloudformation Drupal application. The architecture of the system features a [nested stack](https://aws.amazon.com/blogs/devops/use-nested-stacks-to-create-reusable-templates-and-support-role-specialization/) framework which builds a fault-tolerant mySQL RDS backend which powers the load balanced EC2 front-end. This guide covers the steps from prerequisites to cleanup.
 
 ### Prerequisites
 
@@ -98,4 +98,6 @@ This section provides a process for tearing down your Cloudformation environment
 
 The next phase of the design should include a Route53 mechanism for creation of a dynamic Cname via cloudformation parameters enabling more of a private customer SaaS like experience.
 
-The template is structured into nested stacks for reasons of scalability. The main stack is responsible for parameter configuration and the DB stack is created for the connection of the Drupal stack. The elastic load balancer endpoint enables fault tolerance through instance health checks configured on http port 80 and this is indicative of our application's health. The RDS instance is deployed in a multi-AZ configuration which also provides redundancy in the event of a database tier failure. The architecture of the Drupal system will tolerate end-to-end failures at the ELB, EC2, and RDS.
+The template is structured into nested stacks for reasons of scalability. The main stack is responsible for parameter configuration and the DB stack is created for the connection of the Drupal stack. The elastic load balancer endpoint enables fault tolerance through instance health checks configured on http port 80 and this is indicative of our application's health. The RDS instance is deployed in a multi-AZ configuration which also provides redundancy in the event of a database tier failure. The architecture of the Drupal system will tolerate end-to-end failures at the ELB, EC2, and RDS layers.
+
+![Drupal Architecture](/images/CognitoOverview.png)
