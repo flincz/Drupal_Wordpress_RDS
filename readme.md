@@ -46,7 +46,7 @@ Each parameter is detailed for deployment
     2. Specify an Amazon S3 template URL: https://s3.amazonaws.com/drupalstack/templates/root.json then select      **Next** to proceed through the wizard.
     3. Specify each parameter
 
-          **Stack Name**
+          * **Stack Name**
           1. Name of the cloudformation stack you will create
 
           **DevOps**
