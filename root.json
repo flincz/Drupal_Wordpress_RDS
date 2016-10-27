@@ -131,7 +131,6 @@
       "AllowedValues" : [ "true", "false" ],
       "ConstraintDescription" : "must be either true or false."
     },
-
     "TemplateBucket" : {
         "Description" : "S3 bucket where templates are stored.",
         "Type" : "String",
