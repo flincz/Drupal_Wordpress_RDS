@@ -86,6 +86,10 @@
   },
 
   "Outputs" : {
-
+    "dbHost" : {
+      "Description" : "dbEndpoint Hostname",
+      "Value" :  { "Fn::GetAtt" : ["DBInstance", "Endpoint.Address"] },
+      "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-dbEndpoint" }}
+    }
   }
 }
