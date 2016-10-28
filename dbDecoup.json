@@ -61,7 +61,7 @@
     "DBSG": {
       "Type": "AWS::RDS::DBSecurityGroup",
       "Properties": {
-        "GroupDescription" : "Bling Blarghhh",
+        "GroupDescription" : "Bling Blarghhhh",
         "DBSecurityGroupIngress": { "EC2SecurityGroupName": { "Ref" : "WebServerSecurityGroupStatPass" }      }
     }
     },
