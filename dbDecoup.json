@@ -86,6 +86,10 @@
   },
 
   "Outputs" : {
-
+    "dbString" : {
+        "Description" : "The RDS string for MySQL connection",
+        "Value" :  { "Fn::GetAtt" : ["DBInstance", "Endpoint.Address"] },
+        "Export" : { "Name" : {"Fn::Sub": "${AWS::StackName}-dbString" }}
+      }
   }
 }
