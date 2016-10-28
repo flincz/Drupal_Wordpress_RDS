@@ -41,10 +41,6 @@
       "Description" : "The Drupal database admin account password",
       "Type": "String"
     },
-    "DrupalDBRootPassword": {
-      "Description" : "The Drupal database root account password",
-      "Type": "String"
-    },
     "DrupalDBClass" : {
       "Description" : "Database instance class",
       "Type" : "String"
@@ -284,12 +280,7 @@
             "}\n",
 
             "# Install Apache Web Server, MySQL, PHP and Drupal\n",
-            "/opt/aws/bin/cfn-init -s ", { "Ref" : "AWS::StackId" }, " -r WebServer ",
-  		  "    --region ", { "Ref" : "AWS::Region" }, " || error_exit 'Failed to run cfn-init'\n",
-
-            "# Setup MySQL root password and create a user\n",
-            "mysqladmin -u root password '", { "Ref" : "DrupalDBRootPassword" }, "' || error_exit 'Failed to initialize root password'\n",
-            "mysql -u root --password='", { "Ref" : "DrupalDBRootPassword" }, "' < /tmp/setup.mysql || error_exit 'Failed to create database user'\n",
+            "/opt/aws/bin/cfn-init -s ", { "Ref" : "AWS::StackId" }, " -r WebServer ", "    --region ", { "Ref" : "AWS::Region" }, " || error_exit 'Failed to run cfn-init'\n",
 
             "# Make changes to Apache Web Server configuration\n",
             "mv /var/www/html/drupal-7.8/* /var/www/html\n",
