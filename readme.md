@@ -18,10 +18,10 @@ In this lab guide, the necessary process is provided for deploying a cloudformat
 Copying template resources to the correct locations
 
    1. Clone repo - https://github.com/gd01rory/Drupal_Wordpress_RDS.git
-   2. Create S3 bucket - **drupalstack**
+   2. Create an S3 bucket and we'll refer to it as TemplateBucket through the rest of this guide
    3. Add a folder called "templates" to this bucket
    4. Copy json files to /templates directory
-   5. Bucket/object permissions to enable read all json in /templates
+   5. Bucket/object permissions to enable read all json in /templates (making public will work for this use case)
 
 ### Cloudformation
 
@@ -44,7 +44,7 @@ Please consider security precautions such as Drupal credentials and SSHLocation.
 Each parameter is detailed for custom deployment
 
     1. **Create stack** in cloudformation console
-    2. Specify the Amazon S3 template URL: https://s3.amazonaws.com/REPLACEwithBUCKETNAME/templates/root.json then select **Next** to proceed through the wizard.
+    2. Specify the Amazon S3 template URL: https://s3.amazonaws.com/TemplateBucketimproved/templates/root.json then select **Next** to proceed through the wizard.
     3. Specify each parameter
 
           **Stack Name**
