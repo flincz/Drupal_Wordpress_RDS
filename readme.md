@@ -28,7 +28,7 @@ Copying template resources to the correct locations
 * **Quick Deploy** -
 Please consider security precautions such as Drupal credentials and SSHLocation. Default credentials set to admin/password and all traffic inbound are allowed.
 
-    1. Please edit the following URL to include TemplateBucket name specified in prerequisites ( om/drupalstack/te <---change drupalstack )
+    1. Please edit the following URL to include TemplateBucket name specified in prerequisites
     <a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=ion&templateURL=https://s3.amazonaws.com/drupalstack/templates/root.json">Launch Stack</a>
     2. Select **Next** to proceed.
     3. Review parameter groups
