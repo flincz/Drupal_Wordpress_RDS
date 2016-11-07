@@ -102,4 +102,3 @@ The template is structured into nested stacks for reasons of scalability. The ma
 
 The next phase of the design should include a Route53 mechanism for creation of dynamic Cname via cloudformation parameters, enabling more of a private customer SaaS-like experience.
 
-![Drupal Architecture](https://s3.amazonaws.com/drupalstack/templates/diagram/drupal.png)
